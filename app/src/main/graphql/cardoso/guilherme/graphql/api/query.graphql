@@ -1,0 +1,15 @@
+query FeedQuery {
+    feed {
+        id
+        description,
+        url
+    }
+}
+
+mutation CreateLink($description: String!, $url: String!) {
+    post(description: $description, url: $url) {
+        id
+        url
+        description
+    }
+}

@@ -1,0 +1,5 @@
+mutation DeleteLink($id: String!) {
+    deleteLink(id: $id) {
+        id
+    }
+}
