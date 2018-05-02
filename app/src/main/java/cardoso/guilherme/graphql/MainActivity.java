@@ -18,7 +18,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import cardoso.guilherme.graphql.api.FeedQuery;
+import cardoso.guilherme.graphql.api.GetFeedQuery;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Intent service = new Intent(this, NewLinkService.class);
+        service.putExtra("KEY1", "Value to be used by the service");
+        startService(service);
+
     }
 
     @Override
@@ -69,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 .serverUrl(BASE_URL)
                 .build();
 
-        apolloClient.query(FeedQuery.builder().build()).enqueue(new ApolloCall.Callback<FeedQuery.Data>() {
+        apolloClient.query(GetFeedQuery.builder().build()).enqueue(new ApolloCall.Callback<GetFeedQuery.Data>() {
             @Override
-            public void onResponse(@Nonnull Response<FeedQuery.Data> response) {
+            public void onResponse(@Nonnull Response<GetFeedQuery.Data> response) {
                 Log.d("FEEDQUERY SUCCESS", response.data().toString());
                 updateList(response.data().feed());
             }
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateList(final List<FeedQuery.Feed> feed) {
+    private void updateList(final List<GetFeedQuery.Feed> feed) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
