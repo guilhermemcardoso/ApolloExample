@@ -1,0 +1,7 @@
+subscription onUpdateLink() {
+    linkChanged() {
+        id
+        url
+        description
+    }
+}

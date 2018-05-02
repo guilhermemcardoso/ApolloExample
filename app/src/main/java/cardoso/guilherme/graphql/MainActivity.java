@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         feedRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        feedAdapter = new FeedAdapter();
+        feedAdapter = new FeedAdapter(this);
         feedRecyclerView.setAdapter(feedAdapter);
 
         addFab.setOnClickListener(new View.OnClickListener() {
@@ -57,16 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Intent service = new Intent(this, NewLinkService.class);
-        service.putExtra("KEY1", "Value to be used by the service");
-        startService(service);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         apolloClient = ApolloClient
                 .builder()
@@ -85,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("FEEDQUERY FAILED", e.getMessage());
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //apolloClient.subscribe()
     }
 
     private void updateList(final List<GetFeedQuery.Feed> feed) {

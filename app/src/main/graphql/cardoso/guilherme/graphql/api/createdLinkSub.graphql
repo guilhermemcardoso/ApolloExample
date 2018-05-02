@@ -1,0 +1,7 @@
+subscription onCreateLink() {
+    createdLink() {
+        id
+        url
+        description
+    }
+}
